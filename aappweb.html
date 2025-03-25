@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ແຈ້ງສ້ອມແປງ</title>
+</head>
+<body>
+    <h1>ແຈ້ງສ້ອມແປງ</h1>
+    <form id="repairForm">
+        <label for="reporter">ຊື່ຜູ້ແຈ້ງ:</label><br>
+        <input type="text" id="reporter" name="reporter" required><br><br>
+
+        <label for="issue">ບັນຫາທີ່ຕ້ອງການແຈ້ງ:</label><br>
+        <input type="text" id="issue" name="issue" required><br><br>
+
+        <label for="description">ຄຳອະທິບາຍ:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+        <label for="image">ຮູບປະກອບ:</label><br>
+        <input type="file" id="image" name="image" accept="image/*"><br><br>
+
+        <button type="button" onclick="sendData()">ສົ່ງຂໍ້ມູນ</button>
+    </form>
+
+    <script>
+        function sendData() {
+            const form = document.getElementById('repairForm');
+            const formData = new FormData(form);
+
+            fetch('https://script.google.com/macros/s/ລິງຄ໌ທີ່ສ້າງຜ່ານ Apps Script/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert("ຂໍ້ມູນຖືກສົ່ງສຳເລັດ!"))
+            .catch(error => console.error("ຂໍ້ຜິດພາດ:", error));
+        }
+    </script>
+</body>
+</html>
